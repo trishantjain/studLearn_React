@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes }
   from "react-router-dom";
-// import Navbar from './components/Navbar';
 import Index from './components/Index';
 import About from './components/About';
 import Question from './components/Question';
@@ -9,8 +8,6 @@ import Login from './components/Login';
 import Contact from './components/Contact';
 
 function App(props) {
-
-  // const backColor = 
 
   return (
     <>
