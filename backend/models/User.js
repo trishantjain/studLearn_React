@@ -11,6 +11,10 @@ const UserSchema = new Schema({
         required: true,
         unique: true,
     },
+    phone:{
+        type: Number,
+        required: true
+    },
     password: {
         type: String, 
         required: true
@@ -21,5 +25,5 @@ const UserSchema = new Schema({
     },
   });
 
-const User = mongoose.model('user', UserSchema);
+const User = mongoose.model('signup', UserSchema);
 module.exports = User;
