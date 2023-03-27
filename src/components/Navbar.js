@@ -6,7 +6,7 @@ function Navbar(props) {
 
     return (
         <header className="header_section">
-            <nav className="navbar navbar-expand-lg custom_nav-container" style={props.style}>
+            <nav className="navbar navbar-expand-lg custom_nav-container sticky-top" style={props.style}>
                 <Link className="navbar-brand" to="/index">
                     <span>
                         studlearn
