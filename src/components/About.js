@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 function About() {
     return (
         <div>
-            < Navbar style={{ backgroundColor: "#041858" }} active2={"active"}/>
+            < Navbar style={{ backgroundColor: "#041858" }} active2={"active"} />
             <section className="about_section ">
                 <div className="container">
                     <div className="row">
