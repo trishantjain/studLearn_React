@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
-import './css/login.css';
+import './css/signup.css';
 
 
 function Signup(props) {
