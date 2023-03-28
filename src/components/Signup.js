@@ -58,13 +58,13 @@ function Signup(props) {
                     <p>Don't have an account? <a href="/">Creat Your Account</a> it takes less than a minute</p>
                     <div className="inputs">
                         <form onSubmit={handleSubmit}>
-                            <input type="text" placeholder="Enter your name" id="name" name='name' value={credentials.name} onChange={onChange} />
+                            <input type="text" placeholder="Enter your name" id="name" name='name' value={credentials.name} onChange={onChange} required/>
                             <br />
-                            <input type="email" placeholder="Enter your email" id='email' name='email' value={credentials.email} onChange={onChange} />
+                            <input type="email" placeholder="Enter your email" id='email' name='email' value={credentials.email} onChange={onChange} required/>
                             <br />
-                            <input type="number" placeholder="Contact Details" id='phone' name='phone' value={credentials.phone} onChange={onChange} />
+                            <input type="tel" placeholder="Contact Details" id='phone' name='phone' value={credentials.phone} onChange={onChange} required/>
                             <br />
-                            <input type="password" placeholder="password" id='password' name='password' value={credentials.password} onChange={onChange} />
+                            <input type="password" placeholder="password" id='password' name='password' value={credentials.password} onChange={onChange} required/>
                             <button onSuspend={handleSubmit}>Login</button>
                         </form>
                     </div>
