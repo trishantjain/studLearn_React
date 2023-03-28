@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 const Index = (props) => {
     return (
         <>
-            <Navbar style={{backgroundColor: "#222a33"}} active1={"active"}/>
+            <Navbar style={{ backgroundColor: "#222a33" }} active1={"active"} />
             <div className="hero_area">
                 <section className=" slider_section ">
                     <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
