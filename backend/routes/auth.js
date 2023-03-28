@@ -7,7 +7,7 @@ const { body, validationResult } = require('express-validator');
 router.post('/createuser', [
     body('email', 'Enter a valid email').isEmail(),
     body('name', 'Enter a valid name').isLength({ min: 6 }),
-    body('phone', 'Enter a valid phone').isNumeric({ min: 10 }),
+    body('phone', 'Enter a valid phone').isLength({ min: 10, max:10 }),
     body('password', 'set password of atleast 5 character').isLength({ min: 5 })
 ], async (req, res) => {
     console.log('entered in creating loop');
