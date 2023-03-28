@@ -121,15 +121,15 @@ a:focus {
 }
 
 .custom_nav-container .nav_search-btn {
-    background-image: url(../images/search-icon.png);
-    background-size: 22px;
-    background-repeat: no-repeat;
-    background-position-y: 7px;
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    border: none;
-  }
+  background-image: url(../images/search-icon.png);
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position-y: 7px;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: none;
+}
 
 .navbar-brand {
   margin-left: 25px;
@@ -672,12 +672,13 @@ a:focus {
 }
 
 .client_section .carousel_btn-container .carousel-control-prev {
-    background-image: url(../images/prev-white.png);
-  }
+  background-image: url(../images/prev-white.png);
+}
 
 .client_section .carousel_btn-container .carousel-control-next {
-    background-image: url(../images/next-white.png);
-  }
+  background-image: url(../images/next-white.png);
+}
+
 /* 
 .footer_bg {
     background-image: url(../images/footer-bg.png);
