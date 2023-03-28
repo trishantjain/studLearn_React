@@ -13,7 +13,7 @@ function Question() {
 
     return (
         <>
-            <Navbar style={{backgroundColor: "#041858"}} active3={"active"}/>
+            <Navbar style={{ backgroundColor: "#041858" }} active3={"active"} />
             <section className="service_section layout_padding">
                 <div className="container-fluid">
                     <div className="heading_container">
