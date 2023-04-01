@@ -32,7 +32,7 @@ function Navbar(props) {
                                 <Link className="nav-link" to="/question">Ask Question</Link>
                             </li>
                             <li className={`nav-item ${props.active4}`}>
-                                <Link className="nav-link" to="/login">Signup</Link>
+                                <Link className="nav-link" to="/signup">Signup</Link>
                             </li>
                             <li className={`nav-item ${props.active5}`}>
                                 <Link className="nav-link" to="/contact">Contact Us</Link>
