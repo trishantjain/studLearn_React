@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
+import { useNavigate } from 'react-router-dom'
 import './css/signup.css';
 
 
 function Signup(props) {
+    let history = useNavigate()
+
     const [credentials, setCredentials] = useState({ name: "", email: "", phone: "", password: "" })
 
     const handleSubmit = async (e) => {
@@ -21,7 +24,7 @@ function Signup(props) {
 
         if (json.success) {
             localStorage.setItem('token', json.authToken);
-            // history('/');
+            history('/');
             props.showAlert("Account created successfully", "success")
         }
 
