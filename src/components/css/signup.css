@@ -80,7 +80,8 @@ body {
 }
 
 .box-form .right {
-    padding: 90px;
+    padding: 70px;
+    width: 50%;
     overflow: hidden;
 }
 
