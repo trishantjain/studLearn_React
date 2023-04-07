@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 function Navbar(props) {
-    // const [style, setStyle] = useState({backgroundColor: "green"})
 
     return (
         <header className="header_section">
