@@ -40,8 +40,8 @@ function Signup(props) {
 
 
     return (
-        <div>
-            <Navbar style={{ backgroundColor: "#041858" }} active4={"active"} />
+        <div className='body'>
+            <Navbar style={{ backgroundColor: "#041858" }} active5={"active"} />
             <div className="box-form my-5">
                 <div className="left">
                     <div className="overlay">
