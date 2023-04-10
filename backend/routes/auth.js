@@ -15,7 +15,8 @@ router.post('/createuser', [
     body('phone', 'Enter a valid phone').isLength({ min: 10, max: 10 }),
     body('password', 'set password of atleast 5 character').isLength({ min: 5 })
 ], async (req, res) => {
-    console.log('entered in creating loop');
+
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -27,7 +28,6 @@ router.post('/createuser', [
         if (user) {
             return res.status(400).json({ error: "Sorry! User with email already exists" })
         }
-        console.log('checking email');
 
         const salt = await bcrypt.genSalt(10);
         const secPass = await bcrypt.hash(req.body.password, salt);
@@ -49,8 +49,9 @@ router.post('/createuser', [
         //? Sending a Authorization token to the user after successful login
         // Adding User Id of the user in the auth-token
         const authToken = jwt.sign(data, JWT_SECRET);
+        success = true;
+        res.json({ success, authToken });
 
-        res.json({ authToken });
 
     } catch (error) {
         console.log(error.message)
