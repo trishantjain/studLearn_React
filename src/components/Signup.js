@@ -11,7 +11,7 @@ function Signup(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:5000/auth/createuser`, {
+        const response = await fetch(process.env.REACT_APP_SIGNUP_API, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -21,16 +21,16 @@ function Signup(props) {
         });
         const json = await response.json();
         console.log(json)
-        setCredentials({ name: "", email: "", phone: "", password: "" });
+        // setCredentials({ name: "", email: "", phone: "", password: "" });
 
         if (json.success) {
             localStorage.setItem('token', json.authToken);
-            history('/');
-            props.showAlert("Account created successfully", "success")
+            history('/question');
+            console.log("You are successful signup.");
         }
 
         else {
-            props.showAlert("Invalid Credentials", "danger")
+            console.log("We can not signup.")
         }
     }
 
