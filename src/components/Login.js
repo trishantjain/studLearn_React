@@ -15,7 +15,7 @@ function Login(props) {
     // Function send the auth token to login to user
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:5000/auth/login`, {
+        const response = await fetch(process.env.REACT_APP_LOGIN_API, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
