@@ -1,17 +1,16 @@
 import { useState } from "react"
-import quesContext from "./noteContext"
+import QuesContext from "./quesContext"
 
-function QuesState(props) {
+const QuesState = (props) => {
 
   const host = "http://localhost:5000"
   const quesinitial = []
 
-  const [question, setQues] = useState(quesinitial)
+  const [question, setQuestion] = useState(quesinitial)
 
   //* Function: - Get all questions asked by the particular user 
-  const getNotes = async () => {
-    // API Call 
-    const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+  const getQues = async () => {
+    const response = await fetch(`${host}/ques/fetchallques`, {
       method: "GET",
       headers: {
         'Content-Type': 'applicaton/json',
@@ -19,13 +18,12 @@ function QuesState(props) {
       },
     });
     const json = await response.json();
-    setQues(json);
+    setQuestion(json);
   }
 
   //* Function: - For adding Question asked by the user
-  const addNote = async (ques) => {
-    // API Call 
-    const response = await fetch(`${host}/api/notes/addnote`, {
+  const addQues = async (ques) => {
+    const response = await fetch(`${host}/ques/addques`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -35,16 +33,16 @@ function QuesState(props) {
     });
 
     // Updating note in frontend        
-    const json2 = await response.json();
-    setQues(question.concat(json2))
+    const user_question = await response.json();
+    setQuestion(question.concat(user_question))
   }
 
 
   return (
     <div>
-      <quesContext.Provider value={{ question, getNotes, addNote }}>
+      <QuesContext.Provider value={{ question, getQues, addQues }}>
         {props.children}
-      </quesContext.Provider>
+      </QuesContext.Provider>
     </div>
   )
 }
