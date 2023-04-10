@@ -1,14 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
-// import tele_img from './images/TelephoneWhite.png'
-// import env_img from './images/EnvelopeWhite.png'
-// import images from './images'
-// require.context('../images', false, /\.(png|jpe?g|svg)$/)
+// import quesContext from '../context/ques/quesContext'
 
 function Question() {
 
-    function getQuery() {
-        alert('Hello!');
+    // const context = useContext(quesContext);
+    // let history = useNavigate()
+    // const { getQues, addQues } = context;
+
+    // useEffect(() => {
+    //     if (localStorage.getItem('token')) {
+    //         getQues();
+    //     }
+    //     else {
+    //         history("/login")
+    //     }
+    //     // eslint-disable-next-line
+    // }, [])
+
+
+    const [ques, setQues] = useState({ userQues: "" })
+
+    const handleClick = async (e) => {
+        // history("/")
+        e.preventDefault();
+        const response = await fetch(process.env.REACT_APP_ADDQUES_API, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('token'),
+            },
+            body: JSON.stringify({ userQues: ques.userQues })
+        });
+
+        // Updating note in frontend        
+        const user_question = await response.json();
+        console.log(user_question);
+        setQues({ userQues: "" })
+    }
+    // addQues(ques.question)
+
+
+    const onChange = (e) => {
+        setQues({ ...ques, [e.target.name]: e.target.value })
     }
 
     return (
@@ -20,12 +55,13 @@ function Question() {
                         <h2 className="my-4">
                             Ask a Question
                         </h2>
-                        <form id="form1">
+                        <form id="form1" onSubmit={handleClick}>
                             <div className="form-row ">
                                 <div className="form-group col-md-12">
-                                    <input style={{ width: "1000px" }} type="text" className="form-control" id="query" name="quesQuery" placeholder="Search... " />
+                                    <input style={{ width: "1000px" }} type="text" className="form-control" id="query" name="userQues" placeholder="Search... "
+                                        value={ques.userQues} onChange={onChange} />
                                 </div>
-                                <button type="submit" className="mx-auto btn btn-success my-2" onClick={getQuery}>Submit</button>
+                                <button type="submit" className="mx-auto btn btn-success my-2"  >Submit</button>
                             </div>
                         </form>
                         <p className=" mx-auto">
