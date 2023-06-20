@@ -49,7 +49,9 @@ function Navbar(props) {
                             </span>
                         </a>
                         <form className="form-inline">
-                            <button className="btn nav_search-btn" type="submit"></button>
+                            <Link>
+                                <button className="btn nav_search-btn" type="submit" onClick={()=>{alert("Search Button Clicked")}}></button>
+                            </Link>
                         </form>
                     </div>
                 </div>
