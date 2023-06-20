@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './css/signup.css';
 
 
@@ -61,12 +61,14 @@ function Signup(props) {
                     <h5>Sign Up</h5>
                     <div className="inputs">
                         <form onSubmit={handleSubmit}>
+                            <p className='form-cond' style={{color: "lightcoral"}}>*Minimum 6 characters</p>
                             <input type="text" placeholder="Enter your name" id="name" name='name' value={credentials.name} onChange={onChange} required />
                             <br />
                             <input type="email" placeholder="Enter your email" id='email' name='email' value={credentials.email} onChange={onChange} required />
                             <br />
                             <input type="tel" placeholder="Contact Details" id='phone' name='phone' value={credentials.phone} onChange={onChange} required />
                             <br />
+                            <p className='form-cond' style={{color: "lightcoral"}}>*Minimum 5 digits</p>
                             <input type="password" placeholder="password" id='password' name='password' value={credentials.password} onChange={onChange} required />
                             <button onSuspend={handleSubmit}>Sign Up</button>
                         </form>
@@ -79,7 +81,7 @@ function Signup(props) {
                             <input type="checkbox" name="item" />
                             <span className="text-checkbox">Remember me</span>
                         </label>
-                        <a href='/'>Forget password</a>
+                        <Link to='/'>Forget password</Link>
                     </div>
 
                     <br />
