@@ -5,19 +5,6 @@ import Navbar from './Navbar';
 
 function Question() {
 
-    // const context = useContext(quesContext);
-    // let history = useNavigate()
-    // const { getQues, addQues } = context;
-
-    // useEffect(() => {
-    //     if (localStorage.getItem('token')) {
-    //         getQues();
-    //     }
-    //     else {
-    //         history("/login")
-    //     }
-    //     // eslint-disable-next-line
-    // }, [])
 
 
     const [ques, setQues] = useState({ userQues: "" })
@@ -36,10 +23,38 @@ function Question() {
 
         // Updating note in frontend        
         const user_question = await response.json();
-        console.log(user_question);
+        console.log(user_question.userQues);
         setQues({ userQues: "" })
+
+        const API_ENDPOINT = 'https://api.openai.com/v1/engines/text-davinci-002/completions';
+        const apiKey = "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"
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+        };
+
+        const data = {
+            'prompt': user_question.userQues,
+            'temperature': 0.5,
+            'max_tokens': 1000,
+            'top_p': 1,
+            'frequency_penalty': 0,
+            'presence_penalty': 0
+        };
+
+        await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data)
+        }).then(response => response.json())
+            .then(json => {
+                const result2 = json.choices[0].text;
+                document.getElementById('answer').innerHTML = result2;
+                console.log(result2);
+
+            })
     }
-    // addQues(ques.question)
 
 
     const onChange = (e) => {
@@ -57,7 +72,7 @@ function Question() {
                         </h2>
                         <form id="form1" onSubmit={handleClick}>
                             <div className="form-row ">
-                                <div className="form-group col-md-12">
+                                <div className="form-group container">
                                     <input style={{ width: "1000px" }} type="text" className="form-control" id="query" name="userQues" placeholder="Search... "
                                         value={ques.userQues} onChange={onChange} />
                                 </div>
@@ -70,7 +85,7 @@ function Question() {
                     </div>
                 </div>
 
-                <div id="answer"></div>
+                <div id="answer" className='container ans_div'></div>
                 <img id="imgGen" alt='Img generating' />
             </section>
             <div className="sub_page">
