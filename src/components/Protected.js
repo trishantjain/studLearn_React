@@ -10,6 +10,7 @@ function Protected(props) {
         if(!check_login){
             // console.log("question route accesed");
             history('/login');
+            alert("Login first")
         }
     });
 
