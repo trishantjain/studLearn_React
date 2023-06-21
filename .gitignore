@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules
+code_saver.js
 /.pnp
 .pnp.js
 
@@ -11,6 +12,7 @@ node_modules
 # production
 /build
 
+.env
 # misc
 .DS_Store
 .env.local
