@@ -27,12 +27,12 @@ function Login(props) {
 
         if (json.success) {
             localStorage.setItem('token', json.authToken);
+            alert("You are successful login.");
             history('/question');
-            console.log("You are successful login.");
         }
 
         else {
-            console.log("We can not login.")
+            alert("You can not login.")
         }
     }
 
