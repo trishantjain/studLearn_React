@@ -8,6 +8,7 @@ function Question() {
 
 
     const [ques, setQues] = useState({ userQues: "" })
+    console.log(process.env.REACT_APP_OPEN_API);
 
     const handleClick = async (e) => {
         // history("/")
@@ -26,12 +27,12 @@ function Question() {
         console.log(user_question.userQues);
         setQues({ userQues: "" })
 
-        const API_ENDPOINT = 'https://api.openai.com/v1/engines/text-davinci-002/completions';
-        const apiKey = "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"
+        // const API_ENDPOINT = 'https://api.openai.com/v1/engines/text-davinci-002/completions';
+        // const apiKey = "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"
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${process.env.REACT_APP_OPEN_API}`
         };
 
         const data = {
@@ -43,7 +44,7 @@ function Question() {
             'presence_penalty': 0
         };
 
-        await fetch(API_ENDPOINT, {
+        await fetch(process.env.REACT_APP_TEXT_API_ENDPOINT, {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(data)
