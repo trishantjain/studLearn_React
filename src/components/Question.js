@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
-// import quesContext from '../context/ques/quesContext'
 
 function Question() {
 
 
 
     const [ques, setQues] = useState({ userQues: "" })
-    console.log(process.env.REACT_APP_OPEN_API);
 
     const handleClick = async (e) => {
         // history("/")
@@ -24,11 +21,7 @@ function Question() {
 
         // Updating note in frontend        
         const user_question = await response.json();
-        console.log(user_question.userQues);
         setQues({ userQues: "" })
-
-        // const API_ENDPOINT = 'https://api.openai.com/v1/engines/text-davinci-002/completions';
-        // const apiKey = "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"
 
         const headers = {
             'Content-Type': 'application/json',
@@ -52,8 +45,6 @@ function Question() {
             .then(json => {
                 const result2 = json.choices[0].text;
                 document.getElementById('answer').innerHTML = result2;
-                console.log(result2);
-
             })
     }
 
