@@ -2,6 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 function Navbar(props) {
+    
+    const Logout = () => {
+        let check_login = localStorage.getItem('token');
+        if (check_login) {
+            localStorage.clear();
+            window.location.href = "/login"
+        }
+    }
 
     return (
         <header className="header_section">
@@ -50,9 +58,10 @@ function Navbar(props) {
                         </a>
                         <form className="form-inline">
                             <Link>
-                                <button className="btn nav_search-btn" type="submit" onClick={()=>{alert("Search Button Clicked")}}></button>
+                                <button className="btn nav_search-btn" type="submit" onClick={() => { alert("Search Button Clicked") }}></button>
                             </Link>
                         </form>
+                        <button className='btn btn-success mx-2' onClick={Logout}>Logout</button>
                     </div>
                 </div>
             </nav>
