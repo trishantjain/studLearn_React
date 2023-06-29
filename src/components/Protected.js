@@ -6,9 +6,7 @@ function Protected(props) {
     let history = useNavigate();
     useEffect(()=>{
         let check_login = localStorage.getItem('token')
-        // let check_login = true;
         if(!check_login){
-            // console.log("question route accesed");
             history('/login');
             alert("Login first")
         }
