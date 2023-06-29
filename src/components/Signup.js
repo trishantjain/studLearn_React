@@ -20,17 +20,15 @@ function Signup(props) {
 
         });
         const json = await response.json();
-        console.log(json)
         // setCredentials({ name: "", email: "", phone: "", password: "" });
 
         if (json.success) {
             localStorage.setItem('token', json.authToken);
             history('/question');
-            console.log("You are successful signup.");
         }
 
         else {
-            console.log("We can not signup.")
+            console.log("Cannot signup.")
         }
     }
 
