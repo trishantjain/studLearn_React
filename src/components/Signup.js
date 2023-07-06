@@ -11,7 +11,8 @@ function Signup(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(process.env.REACT_APP_SIGNUP_API, {
+        const signup_api = process.env.REACT_APP_SIGNUP_API;
+        const response = await fetch(signup_api, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

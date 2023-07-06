@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import './css/signup.css';
-require("dotenv").config();
+// require("dotenv").config();
 // trishant --> 'jain@888'
 // chetan --> 'psdew@alkd'
 
@@ -16,7 +16,8 @@ function Login(props) {
     // Function send the auth token to login to user
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(process.env.REACT_APP_LOGIN_API, {
+        const login_api = process.env.REACT_APP_LOGIN_API;
+        const response = await fetch(login_api, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
