@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar';
-import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './css/signup.css';
+require("dotenv").config();
 // trishant --> 'jain@888'
 // chetan --> 'psdew@alkd'
 
