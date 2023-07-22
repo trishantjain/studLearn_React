@@ -1,11 +1,28 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar';
-import { Link } from 'react-router-dom'
+import GoogleButton from 'react-google-button'
+import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import './css/signup.css';
-// require("dotenv").config();
-// trishant --> 'jain@888'
-// chetan --> 'psdew@alkd'
+import { auth, provider } from './Firebase'
+import { signInWithPopup } from 'firebase/auth'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+function Copyright(props) {
+    return (
+        <Typography variant="body2" color="text.secondary" align="center" {...props}>
+            {'Copyright © '}
+            <Link color="inherit" href="https://mui.com/">
+                StudLearn
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
+
+const defaultTheme = createTheme();
 
 function Login(props) {
     let history = useNavigate()
@@ -42,51 +59,138 @@ function Login(props) {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
+    const googleSignup = async () => {
+        try {
+            await signInWithPopup(auth, provider).then((data) => {
+                alert("Successfully Logined...")
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <div className='body'>
+        <>
             <Navbar style={{ backgroundColor: "#041858" }} active4={"active"} />
-            <div className="box-form my-5">
-                <div className="left">
-                    <div className="overlay">
-                        <h1>Stud Learn</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Curabitur et est sed felis aliquet sollicitudin</p>
-                        <span>
-                            <p>login with social media</p>
-                            <a href="/"><i className="fa fa-google" aria-hidden="true"></i>Login with Google</a>
-                            <a href="/"><i className="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
-                        </span>
-                    </div>
-                </div>
+            <ThemeProvider theme={defaultTheme}>
+                <Grid container component="main" sx={{ height: '100vh' }}>
+                    <CssBaseline />
+                    <Grid
+                        item
+                        xs={false}
+                        sm={4}
+                        md={7}
+                        sx={{
+                            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundColor: (t) =>
+                                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                        <Box
+                            sx={{
+                                my: 8,
+                                mx: 4,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                                <LockOutlinedIcon />
+                            </Avatar>
+                            <Typography component="h1" variant="h5">
+                                Login
+                            </Typography>
+                            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    label="Name"
+                                    name="name"
+                                    autoComplete="name"
+                                    autoFocus
+                                    value={credentials.name}
+                                    onChange={onChange}
+                                />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="email"
+                                    label="Email Address"
+                                    type='email'
+                                    id="email"
+                                    autoComplete="email"
+                                    autoFocus
+                                    value={credentials.email}
+                                    onChange={onChange}
+                                />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="phone"
+                                    label="Phone"
+                                    type='tel'
+                                    id="phone"
+                                    autoComplete="phone"
+                                    autoFocus
+                                    value={credentials.phone}
+                                    onChange={onChange}
+                                />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    value={credentials.password}
+                                    onChange={onChange}
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox value="remember" color="primary" />}
+                                    label="Remember me"
+                                />
+                                <GoogleButton
+                                    onClick={googleSignup}>
+                                </GoogleButton>
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                >
+                                    Sign Up
+                                </Button>
+                                <Grid container>
+                                    {/* <Grid item xs>
+                                        <Link href="#" variant="body2">
+                                            Forgot password?
+                                        </Link>
+                                    </Grid> */}
+                                    <Grid item>
+                                        <NavLink to="/login" variant="body2">
+                                            {"Have an account? Login"}
+                                        </NavLink>
+                                    </Grid>
+                                </Grid>
+                                <Copyright sx={{ mt: 5 }} />
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </ThemeProvider>
+        </>
 
-
-                <div className="right">
-                    <h5>Login</h5>
-                    <p>Don't have an account? <Link to="/signup">Creat Your Account</Link> it takes less than a minute</p>
-                    <div className="inputs">
-                        <form onSubmit={handleSubmit}>
-                            <input type="email" placeholder="Enter your email" id='email' name='email' value={credentials.email} onChange={onChange} required />
-                            <br />
-                            <input type="password" placeholder="password" id='password' name='password' value={credentials.password} onChange={onChange} required />
-                            <button onSuspend={handleSubmit}>Login</button>
-                        </form>
-                    </div>
-
-                    <br /><br />
-
-                    <div className="remember-me--forget-password">
-                        <label>
-                            <input type="checkbox" name="item" />
-                            <span className="text-checkbox">Remember me</span>
-                        </label>
-                        <a href='/'>Forget password</a>
-                    </div>
-
-                    <br />
-                </div>
-
-            </div>
-        </div>
     )
 }
 
