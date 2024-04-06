@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar';
-// import GoogleButton from 'react-google-button'
+import GoogleButton from 'react-google-button'
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-// import { auth, provider } from './Firebase'
-// import { signInWithPopup } from 'firebase/auth'
+import { auth, provider } from './Firebase'
+import { signInWithPopup } from 'firebase/auth'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -59,15 +59,16 @@ function Login(props) {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
-    // const googleSignup = async () => {
-    //     try {
-    //         await signInWithPopup(auth, provider).then((data) => {
-    //             alert("Successfully Logined...")
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const googleSignup = async () => {
+        try {
+            await signInWithPopup(auth, provider).then((data) => {
+                alert("Successfully Logined...")
+                history('/question');
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <>
@@ -160,9 +161,9 @@ function Login(props) {
                                     control={<Checkbox value="remember" color="primary" />}
                                     label="Remember me"
                                 />
-                                {/* <GoogleButton
+                                <GoogleButton
                                     onClick={googleSignup}>
-                                </GoogleButton> */}
+                                </GoogleButton>
                                 <Button
                                     type="submit"
                                     fullWidth
