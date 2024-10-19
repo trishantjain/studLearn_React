@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import './css/contact.css'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { AccountCircle, Email, Phone } from '@mui/icons-material';
+import { AccountCircle, Phone } from '@mui/icons-material';
 import { InputAdornment } from '@mui/material'
 import Textarea from '@mui/joy/Textarea';
 
@@ -51,10 +51,10 @@ function Contact() {
                                                 required
                                                 fullWidth
                                                 id="phone"
-                                                label="Your Phone"
-                                                name="phone"
-                                                className='form-control col-md-6'
-                                                autoComplete="phone"
+                                                label="Your Email"
+                                                name="email"
+                                                className='form-control col-md-6 mb-4'
+                                                autoComplete="email"
                                                 size='small'
                                                 variant='filled'
                                                 autoFocus
@@ -69,27 +69,6 @@ function Contact() {
                                                 }}
                                             />
                                         </div>
-                                        <TextField
-                                            required
-                                            fullWidth
-                                            id="email"
-                                            label="Your Email"
-                                            name="email"
-                                            className='form-control col-12 mb-5'
-                                            autoComplete="email"
-                                            size='small'
-                                            variant='filled'
-                                            autoFocus
-                                            InputProps={{
-                                                startAdornment: (
-                                                    <InputAdornment position='start'>
-                                                        <Email
-                                                            fontSize='small'
-                                                        />
-                                                    </InputAdornment>
-                                                )
-                                            }}
-                                        />
                                     </div>
                                     <Textarea
                                         className="form-floating col-md-12 mb-5"

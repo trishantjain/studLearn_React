@@ -33,8 +33,9 @@ function Login(props) {
     // Function send the auth token to login to user
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const login_api = process.env.REACT_APP_LOGIN_API;
-        const response = await fetch(login_api, {
+        // const login_api = process.env.REACT_APP_LOGIN_API;
+        // console.log(login_api)
+        const response = await fetch(`http://localhost:4000/auth/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -107,7 +108,7 @@ function Login(props) {
                                 Login
                             </Typography>
                             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                                <TextField
+                                {/* <TextField
                                     margin="normal"
                                     required
                                     fullWidth
@@ -118,7 +119,7 @@ function Login(props) {
                                     autoFocus
                                     value={credentials.name}
                                     onChange={onChange}
-                                />
+                                /> */}
                                 <TextField
                                     margin="normal"
                                     required
@@ -132,7 +133,7 @@ function Login(props) {
                                     value={credentials.email}
                                     onChange={onChange}
                                 />
-                                <TextField
+                                {/* <TextField
                                     margin="normal"
                                     required
                                     fullWidth
@@ -144,7 +145,7 @@ function Login(props) {
                                     autoFocus
                                     value={credentials.phone}
                                     onChange={onChange}
-                                />
+                                /> */}
                                 <TextField
                                     margin="normal"
                                     required
@@ -170,7 +171,7 @@ function Login(props) {
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                 >
-                                    Sign Up
+                                    Login
                                 </Button>
                                 <Grid container>
                                     {/* <Grid item xs>
@@ -179,8 +180,8 @@ function Login(props) {
                                         </Link>
                                     </Grid> */}
                                     <Grid item>
-                                        <NavLink to="/login" variant="body2">
-                                            {"Have an account? Login"}
+                                        <NavLink to="/signup" variant="body2">
+                                            {"Not have account? SignUp"}
                                         </NavLink>
                                     </Grid>
                                 </Grid>

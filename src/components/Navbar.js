@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
+import { LinkedIn } from '@mui/icons-material'
+import { red } from '@mui/material/colors'
+
 
 function Navbar(props) {
-    
+
     const Logout = () => {
         let check_login = localStorage.getItem('token');
         if (check_login) {
@@ -14,11 +17,11 @@ function Navbar(props) {
     return (
         <header className="header_section">
             <nav className="navbar navbar-expand-lg custom_nav-container sticky-top" style={props.style}>
-                <Link className="navbar-brand" to="/index">
+                <RouterLink className="navbar-brand" to="/index">
                     <span>
                         studlearn
                     </span>
-                </Link>
+                </RouterLink>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="s-1"> </span>
@@ -30,37 +33,35 @@ function Navbar(props) {
                     <div className="d-flex mx-auto flex-column flex-lg-row align-items-center">
                         <ul className="navbar-nav">
                             <li className={`nav-item ${props.active1}`}>
-                                <Link className="nav-link" to="/">Home</Link>
+                                <RouterLink className="nav-link" to="/">Home</RouterLink>
                             </li>
                             <li className={`nav-item ${props.active2}`}>
-                                <Link className="nav-link" to="/about">About</Link>
+                                <RouterLink className="nav-link" to="/about">About</RouterLink>
                             </li>
                             <li className={`nav-item ${props.active3}`}>
-                                <Link className="nav-link" to="/question">Ask Question</Link>
+                                <RouterLink className="nav-link" to="/question">Ask Question</RouterLink>
                             </li>
                             <li className={`nav-item ${props.active4}`}>
-                                <Link className="nav-link" to="/login">Login</Link>
+                                <RouterLink className="nav-link" to="/login">Login</RouterLink>
                             </li>
                             <li className={`nav-item ${props.active5}`}>
-                                <Link className="nav-link" to="/signup">Signup</Link>
+                                <RouterLink className="nav-link" to="/signup">Signup</RouterLink>
                             </li>
                             <li className={`nav-item ${props.active6}`}>
-                                <Link className="nav-link" to="/contact">Contact Us</Link>
+                                <RouterLink className="nav-link" to="/contact">Contact Us</RouterLink>
                             </li>
                         </ul>
                     </div>
                     <div className="quote_btn-container my-2">
-                        <a href="/">
+                        {/* <a href="/">
                             <img src="images/call.png" alt="" />
                             <span>
                                 Call : + 91 7982757222
                             </span>
+                        </a> */}
+                        <a href="https://www.linkedin.com/in/trishant-jain">
+                            <LinkedIn className='mr-2' sx={{ color: red[50] }} />
                         </a>
-                        <form className="form-inline">
-                            <Link>
-                                <button className="btn nav_search-btn" type="submit" onClick={() => { alert("Search Button Clicked") }}></button>
-                            </Link>
-                        </form>
                         <button className='btn btn-success mx-2' onClick={Logout}>Logout</button>
                     </div>
                 </div>

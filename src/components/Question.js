@@ -55,7 +55,10 @@ function Question() {
 
     return (
         <>
+            {/* Navbar Section */}
             <Navbar style={{ backgroundColor: "#041858" }} active3={"active"} />
+
+            {/* Main Section */}
             <section className="service_section layout_padding">
                 <div className="container-fluid">
                     <div className="heading_container">
@@ -68,7 +71,7 @@ function Question() {
                                     <input style={{ width: "1000px" }} type="text" className="form-control" id="query" name="userQues" placeholder="Search... "
                                         value={ques.userQues} onChange={onChange} />
                                 </div>
-                                <button type="submit" className="mx-auto btn btn-success my-2"  >Submit</button>
+                                <button type="submit" className="mx-auto btn btn-success my-2">Submit</button>
                             </div>
                         </form>
                         <p className=" mx-auto">
@@ -80,6 +83,8 @@ function Question() {
                 <div id="answer" className='container ans_div'></div>
                 <img id="imgGen" alt='Img generating' />
             </section>
+
+            {/* Contact Section */}
             <div className="sub_page">
                 <div className="footer_bg">
 
@@ -121,6 +126,7 @@ function Question() {
                         </div>
                     </section>
 
+                    {/* Footer Section */}
                     <section className="info_section layout_padding2">
                         <div className="container">
                             <div className="row">
