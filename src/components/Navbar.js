@@ -59,7 +59,7 @@ function Navbar(props) {
                                 Call : + 91 7982757222
                             </span>
                         </a> */}
-                        <a href="https://www.linkedin.com/in/trishant-jain">
+                        <a href="https://www.linkedin.com/in/trishant-jain" target='_blank' rel="noreferrer">
                             <LinkedIn className='mr-2' sx={{ color: red[50] }} />
                         </a>
                         <button className='btn btn-success mx-2' onClick={Logout}>Logout</button>
