@@ -33,9 +33,8 @@ function Login(props) {
     // Function send the auth token to login to user
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const login_api = process.env.REACT_APP_LOGIN_API;
-        // console.log(login_api)
-        const response = await fetch(`http://localhost:4000/auth/login`, {
+        const login_api = process.env.REACT_APP_LOGIN_API;
+        const response = await fetch(login_api, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
