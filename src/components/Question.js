@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
+import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 
 function Question() {
-
 
 
     const [ques, setQues] = useState({ userQues: "" })
@@ -19,33 +19,39 @@ function Question() {
             body: JSON.stringify({ userQues: ques.userQues })
         });
 
+        // Fetching GENAI API Key
+        const apiKey = process.env.REACT_APP_GENAI_API_KEY;
+        const genAI = new GoogleGenerativeAI(apiKey);
+
+        // Specifying the model
+        const model = genAI.getGenerativeModel({
+            model: "gemini-1.5-flash",
+        });
+
         // Updating note in frontend        
         const user_question = await response.json();
         setQues({ userQues: "" })
 
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_OPEN_API}`
+        const generationConfig = {
+            temperature: 1,
+            topP: 0.95,
+            topK: 64,
+            maxOutputTokens: 8192,
+            responseMimeType: "text/plain",
         };
 
-        const data = {
-            'prompt': user_question.userQues,
-            'temperature': 0.5,
-            'max_tokens': 1000,
-            'top_p': 1,
-            'frequency_penalty': 0,
-            'presence_penalty': 0
-        };
+        const chatSession = model.startChat({
+            generationConfig,
+            history: [
+            ],
+        });
 
-        await fetch(process.env.REACT_APP_TEXT_API_ENDPOINT, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(data)
-        }).then(response => response.json())
-            .then(json => {
-                const result2 = json.choices[0].text;
-                document.getElementById('answer').innerHTML = result2;
-            })
+        // Updating result in Frontend
+        const result = await chatSession.sendMessage(user_question.userQues);
+        const genAnswer = result.response.text()
+        console.log(genAnswer);
+
+        document.getElementById('answer').innerHTML = genAnswer;
     }
 
 
