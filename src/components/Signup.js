@@ -1,71 +1,16 @@
-import React, { useState } from 'react'
+'use client';
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { NavLink, useNavigate } from 'react-router-dom'
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
+
 // import GoogleButton from 'react-google-button'
 // import { auth, provider } from './Firebase'
 // import { signInWithPopup } from 'firebase/auth'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography } from '@mui/material'
+import { Avatar, Button, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-
-// function Signup(props) {
-
-//     return (
-//         <div className='body'>
-//             <Navbar style={{ backgroundColor: "#041858" }} active5={"active"} />
-//             <div className="box-form my-5">
-//                 <div className="left">
-//                     <div className="overlay">
-//                         <h1>Stud Learn</h1>
-//                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-//                             Curabitur et est sed felis aliquet sollicitudin</p>
-//                         <span>
-//                             <p>login with social media</p>
-//                             <GoogleButton onClick={googleSignup} className='google-signin-btn'></GoogleButton>
-//                             {/* <a href="/"><i className="fa fa-google" aria-hidden="true"></i>Login with Google</a> */}
-//                             {/* <a href="/"><i className="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a> */}
-//                         </span>
-//                     </div>
-//                 </div>
-
-
-//                 <div className="right">
-//                     <h5>Sign Up</h5>
-//                     <div className="inputs">
-//                         <form onSubmit={handleSubmit}>
-//                             <p className='form-cond' style={{ color: "lightcoral" }}>*Minimum 6 characters</p>
-//                             <h4>Name</h4>
-//                             <input type="text" placeholder="Enter your name" id="name" name='name' value={credentials.name} onChange={onChange} required />
-//                             <br />
-//                             <input type="email" placeholder="Enter your email" id='email' name='email' value={credentials.email} onChange={onChange} required />
-//                             <br />
-//                             <input type="tel" placeholder="Contact Details" id='phone' name='phone' value={credentials.phone} onChange={onChange} required />
-//                             <br />
-//                             <p className='form-cond' style={{ color: "lightcoral" }}>*Minimum 5 digits</p>
-//                             <input type="password" placeholder="Password" id='password' name='password' value={credentials.password} onChange={onChange} required />
-//                             <button onSuspend={handleSubmit}>Sign Up</button>
-//                         </form>
-//                     </div>
-
-//                     <br /><br />
-
-//                     <div className="remember-me--forget-password">
-//                         <b>
-//                             <Link to='/signup'>Forget password</Link>
-//                         </b>
-//                     </div>
-
-//                     <br />
-//                 </div>
-
-//             </div>
-//         </div >
-//     )
-// }
-
-// export default Signup
-
 
 
 function Copyright(props) {
@@ -84,17 +29,10 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Signup() {
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     const data = new FormData(event.currentTarget);
-    //     console.log({
-    //         email: data.get('email'),
-    //         password: data.get('password'),
-    //     });
-    // };
     let history = useNavigate()
 
     const [credentials, setCredentials] = useState({ name: "", email: "", phone: "", password: "" })
+    const [err, setErr] = useState([])
     // const [googleSign, setGoogleSign] = useState({ g_name: "", g_email: "", g_phone: "" })
 
     const handleSubmit = async (e) => {
@@ -109,8 +47,6 @@ export default function Signup() {
 
         });
         const json = await response.json();
-        console.log(json)
-        // setCredentials({ name: "", email: "", phone: "", password: "" });
 
         if (json.success) {
             localStorage.setItem('token', json.authToken);
@@ -119,13 +55,22 @@ export default function Signup() {
         }
 
         else {
-            console.log("We can not signup.")
+            setErr(json.errors.map((error) => error.msg));
         }
     }
 
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
+
+    useEffect(() => {
+        if (err.length > 0) {
+            const timer = setTimeout(() => {
+                setErr((prevAlert) => prevAlert.slice(1)); // Clear all error from the list after 5s
+            }, 5000);
+            return () => setTimeout(timer) // Cleanup timer on state update
+        }
+    }, [err])
 
     // const googleSignup = async () => {
     //     try {
@@ -141,9 +86,15 @@ export default function Signup() {
         <>
             <Navbar style={{ backgroundColor: "#041858" }} active5={"active"} />
             <ThemeProvider theme={defaultTheme}>
-                <Grid container component="main" sx={{ height: '100vh' }}>
-                    <CssBaseline />
-                    <Grid
+                <Grid container component="main"
+                    sx={{
+                        height: '80vh',
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: 'center',
+                    }}>
+                    {/* <CssBaseline /> */}
+                    {/* <Grid
                         item
                         xs={false}
                         sm={4}
@@ -156,8 +107,30 @@ export default function Signup() {
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
-                    />
-                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                    /> */}
+
+
+                    <Box
+                        sx={{
+                            my: 8,
+                            mx: 4,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'right',
+                        }}
+                    >
+                        {err.length > 0 && (
+                            err.map((msg, index) => (
+                                <Alert key={index} icon={<CheckIcon fontSize="inherit" />} severity="warning">
+                                    {msg}
+                                </Alert>
+                            ))
+                        )}
+                    </Box>
+
+
+                    <Grid item xs={12} sm={8} md={5} component={Paper} square 
+                    >
                         <Box
                             sx={{
                                 my: 8,
@@ -167,6 +140,27 @@ export default function Signup() {
                                 alignItems: 'center',
                             }}
                         >
+
+                            {/* Alert Box */}
+                            {/* <Box
+                                sx={{
+                                    my: 8,
+                                    mx: 4,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'right',
+                                }}
+                            >
+                                {err.length > 0 && (
+                                    err.map((msg, index) => (
+                                        <Alert key={index} icon={<CheckIcon fontSize="inherit" />} severity="warning">
+                                            {msg}
+                                        </Alert>
+                                    ))
+                                )}
+                            </Box> */}
+
+
                             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                                 <LockOutlinedIcon />
                             </Avatar>

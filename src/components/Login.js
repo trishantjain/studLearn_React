@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { auth, provider } from './Firebase'
 import { signInWithPopup } from 'firebase/auth'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography } from '@mui/material'
+import { Avatar, Button, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -51,6 +51,7 @@ function Login(props) {
 
         else {
             alert("You can not login.")
+            // console.log(json.response.error)
         }
     }
 
@@ -74,9 +75,14 @@ function Login(props) {
         <>
             <Navbar style={{ backgroundColor: "#041858" }} active4={"active"} />
             <ThemeProvider theme={defaultTheme}>
-                <Grid container component="main" sx={{ height: '100vh' }}>
-                    <CssBaseline />
-                    <Grid
+                <Grid container component="main" sx={{
+                    height: '100vh',
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: 'center',
+                }} >
+                    {/* <CssBaseline /> */}
+                    {/* <Grid
                         item
                         xs={false}
                         sm={4}
@@ -89,8 +95,8 @@ function Login(props) {
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
-                    />
-                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                    /> */}
+                    <Grid item xs={12} sm={8} md={5} component={Paper} square justifyContent="center">
                         <Box
                             sx={{
                                 my: 8,
