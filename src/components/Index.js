@@ -25,69 +25,11 @@ const Index = (props) => {
                                                     Unlock Your Potential Anytime, Anywhere with our E-Learning Platform
                                                 </p>
                                                 <div className="btn-box">
-                                                    <a href="/" className="btn-1">
+                                                    <a href="/contact" className="btn-1">
                                                         Contact Us
                                                     </a>
-                                                    <a href="/" className="btn-2">
+                                                    <a href="/question" className="btn-2">
                                                         Query
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="img-box">
-                                                <img src={slider} alt="Not Found" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="carousel-item ">
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col-md-6 ">
-                                            <div className="detail_box">
-                                                <h1>
-                                                    The best E-learning platform
-                                                </h1>
-                                                <p>
-                                                    Unlock Your Potential Anytime, Anywhere with our E-Learning Platform.
-                                                </p>
-                                                <div className="btn-box">
-                                                    <a href="/" className="btn-1">
-                                                        Contact Us
-                                                    </a>
-                                                    <a href="/" className="btn-2">
-                                                        Get A Quote
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="img-box">
-                                                <img src={slider} alt="Not Found" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="carousel-item ">
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col-md-6 ">
-                                            <div className="detail_box">
-                                                <h1>
-                                                    The best E-learning platform
-                                                </h1>
-                                                <p>
-                                                    Unlock Your Potential Anytime, Anywhere with our E-Learning Platform.
-                                                </p>
-                                                <div className="btn-box">
-                                                    <a href="/" className="btn-1">
-                                                        Contact Us
-                                                    </a>
-                                                    <a href="/" className="btn-2">
-                                                        Get A Quote
                                                     </a>
                                                 </div>
                                             </div>
