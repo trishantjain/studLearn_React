@@ -22,6 +22,10 @@ function Contact() {
         })
 
         const result = await response.json();
+
+        if(result.success){
+            alert("Your query has been successfully submitted.");
+        }
     }
 
     const onChange = (e) =>{
