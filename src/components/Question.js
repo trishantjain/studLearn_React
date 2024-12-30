@@ -24,6 +24,7 @@ function Question() {
 
         // Fetching GENAI API Key
         const apiKey = process.env.REACT_APP_GENAI_API_KEY;
+        console.log(apiKey);
         const genAI = new GoogleGenerativeAI(apiKey);
 
         // Specifying the model
