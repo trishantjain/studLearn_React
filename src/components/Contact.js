@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './Navbar'
 import './css/contact.css'
 import TextField from '@mui/material/TextField';
@@ -8,6 +8,26 @@ import { InputAdornment } from '@mui/material'
 import Textarea from '@mui/joy/Textarea';
 
 function Contact() {
+
+    const [userQuery, setUserQuery] = useState({ name: "", email: "", message: "" })
+
+    const handleSubmit = async () =>{
+        const contact_api = process.env.REACT_APP_ADDQUERY_API;
+        const response = await fetch(contact_api, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({name: userQuery.name, email: userQuery.email, message:userQuery.message})
+        })
+
+        const result = await response.json();
+    }
+
+    const onChange = (e) =>{
+        setUserQuery({...userQuery, [e.target.name]: e.target.value})
+    }
+
     return (
         <>
             <Navbar style={{ backgroundColor: "#041858" }} active6={"active"} />
@@ -34,6 +54,8 @@ function Contact() {
                                                 size='small'
                                                 variant='filled'
                                                 autoFocus
+                                                value={userQuery.name}
+                                                onChange={onChange}
                                                 sx={{
                                                     paddingRight: "10px"
                                                 }}
@@ -58,6 +80,8 @@ function Contact() {
                                                 size='small'
                                                 variant='filled'
                                                 autoFocus
+                                                value={userQuery.email}
+                                                onChange={onChange}
                                                 InputProps={{
                                                     startAdornment: (
                                                         <InputAdornment position='start'>
@@ -71,17 +95,19 @@ function Contact() {
                                         </div>
                                     </div>
                                     <Textarea
+                                        name="message"
                                         className="form-floating col-md-12 mb-5"
-                                        placeholder="Type..."
+                                        placeholder="Message to us..."
                                         minRows={6}
                                         variant='soft'
+                                        value={userQuery.message}
+                                        onChange={onChange}
                                         sx={{
                                             margin: "15px"
                                         }}
-
                                     />
                                     <div className="col-12 text-center">
-                                        <button className="btn btn-primary-gradient rounded-pill py-3 px-5" type="submit">Send Message</button>
+                                        <button className="btn btn-primary-gradient rounded-pill py-3 px-5" type="submit" onClick={handleSubmit}>Send Message</button>
                                     </div>
                                 </Box>
                             </div>
