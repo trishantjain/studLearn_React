@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+// import { NewsApi } from 'newsapi'
+import './css/question.css';
+import { TypeAnimation } from 'react-type-animation';
 
 function Question() {
 
-
     const [ques, setQues] = useState({ userQues: "" })
+    const [aiResult, setAiResult] = useState("")
 
     const handleClick = async (e) => {
         // history("/")
@@ -25,7 +28,7 @@ function Question() {
 
         // Specifying the model
         const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash",
+            model: "gemini-1.5-pro",
         });
 
         // Updating note in frontend        
@@ -45,13 +48,15 @@ function Question() {
             history: [
             ],
         });
-
+        
         // Updating result in Frontend
         const result = await chatSession.sendMessage(user_question.userQues);
         const genAnswer = result.response.text()
-        console.log(genAnswer);
+        console.log("Gen answer: " + genAnswer);
 
-        document.getElementById('answer').innerHTML = genAnswer;
+        // document.getElementsByClassName('answer').innerHTML = genAnswer;
+        setAiResult(genAnswer);
+        console.log("State Result: " + aiResult);
     }
 
 
@@ -67,27 +72,38 @@ function Question() {
             {/* Main Section */}
             <section className="service_section layout_padding">
                 <div className="container-fluid">
-                    <div className="heading_container">
+                    <div className="heading_container my-4">
                         <h2 className="my-4">
                             Ask a Question
                         </h2>
                         <form id="form1" onSubmit={handleClick}>
-                            <div className="form-row ">
-                                <div className="form-group container">
-                                    <input style={{ width: "1000px" }} type="text" className="form-control" id="query" name="userQues" placeholder="Search... "
+                            <div className="form-row input_dir">
+                                <div className="form-group input_st">
+                                    <input type="text" className="form-control" id="query" name="userQues" placeholder="Search... "
                                         value={ques.userQues} onChange={onChange} />
                                 </div>
                                 <button type="submit" className="mx-auto btn btn-success my-2">Submit</button>
                             </div>
                         </form>
-                        <p className=" mx-auto">
-                            Expert teachers and 24/7 chatbot assistance, Collaborative, inclusive, and innovative education.
-                        </p>
                     </div>
                 </div>
+                
+                {/* Result Section */}
+                <TypeAnimation
+                    key={aiResult}  // It will re-render 'TypeAnimation' Component whenever 'aiResult' changes
+                    sequence={[
+                        aiResult || "Waiting for response",
+                        () => {
+                            console.log('Sequence completed');
+                        },
+                    ]}
+                    className='answer container ans_div my-4'
+                    wrapper="span"
+                    cursor={true}
+                    style={{ fontSize: '1em', display: 'block' }}
+                />
 
-                <div id="answer" className='container ans_div'></div>
-                <img id="imgGen" alt='Img generating' />
+                <img id="imgGen my-3" alt='Img generating...' />
             </section>
 
             {/* Contact Section */}
@@ -210,9 +226,6 @@ function Question() {
                                             </a>
                                             <a href="/">
                                                 <img src={require("./images/info-linkedin.png")} alt="Not found" />
-                                            </a>
-                                            <a href="/">
-                                                <img src={require("./images/info-youtube.png")} alt="Not found" />
                                             </a>
                                         </div>
                                     </div>
